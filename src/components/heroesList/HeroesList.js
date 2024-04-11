@@ -16,7 +16,7 @@ const HeroesList = () => {
     const dispatch = useDispatch();
     const {request} = useHttp();
 
-    useEffect(() => {
+    useEffect(() => {        
         dispatch(heroesFetching());
         request("http://localhost:3001/heroes")
             .then(data => dispatch(heroesFetched(data)))
@@ -31,13 +31,13 @@ const HeroesList = () => {
         return <h5 className="text-center mt-5">Ошибка загрузки</h5>
     }
 
-    const renderHeroesList = (arr) => {
+    const renderHeroesList = (arr) => { 
         if (arr.length === 0) {
             return <h5 className="text-center mt-5">Героев пока нет</h5>
         }
 
-        return arr.map(({id, ...props}) => {
-            return <HeroesListItem key={id} {...props}/>
+        return arr.map(({id, ...props}) => {            
+            return <HeroesListItem key={id} {...props} id={id}/>
         })
     }
 

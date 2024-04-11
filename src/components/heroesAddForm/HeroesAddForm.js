@@ -10,15 +10,18 @@
 // Элементы <option></option> желательно сформировать на базе
 // данных из фильтров
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage, useField } from 'formik';
+import { Formik, Form, Field, ErrorMessage} from 'formik';
+import { v4 as uuidv4 } from 'uuid';
+import { useDispatch } from 'react-redux';
+import { heroesAdding, heroesFetchingError } from '../../actions';
 import * as Yup from "yup"
+
 import {useHttp} from '../../hooks/http.hook';
 
 const HeroesAddForm = () => {
 	const {request} = useHttp();
-    return (     
-		
-      
+	const dispatch = useDispatch();
+    return ( 
 		<Formik
 			initialValues={{ 
 				name: '', 
@@ -26,8 +29,17 @@ const HeroesAddForm = () => {
 				element: '' }}				
 			onSubmit =  {values => {
 				console.log(JSON.stringify(values, null, 2));
-				request("http://localhost:3001/heroes", 'POST', JSON.stringify(values, null, 2));
-				console.log('30');
+				let req = {
+					id: uuidv4(),
+					name: values.name,
+					description: values.text,
+					element: values.element
+				};
+				//console.log('data = ' + JSON.stringify(data, null, 2));
+				request("http://localhost:3001/heroes", 'POST', JSON.stringify(req, null, 2))
+					.then(data => dispatch(heroesAdding(data)))
+					.catch(() => dispatch(heroesFetchingError()));
+				
 			}}
 		>		
 			<Form className="border p-4 shadow-lg rounded">
