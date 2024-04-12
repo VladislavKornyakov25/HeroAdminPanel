@@ -6,9 +6,6 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {  
-    console.log(action.type);
-    console.log(JSON.stringify(state.filters));
-
     switch (action.type) {
         case 'FILTERS_FETCHING':
             return {
@@ -25,9 +22,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 filtersLoadingStatus: 'error'
-            }    
-       
-       
+            }            
         case 'HEROES_FETCHING':
             return {
                 ...state,
@@ -53,12 +48,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 heroes: state.heroes.filter(item => item.id !== action.payload)
-            }
-        case 'HEROES_FILTERING':            
-            return {
-                ...state,
-                heroes: state.heroes.filter(item => item.id !== action.payload)
-            }
+            }        
         default: return state
     }
 }

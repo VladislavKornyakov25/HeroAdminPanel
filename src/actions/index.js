@@ -48,11 +48,3 @@ export const filtersFetchingError = () => {
         type: 'FILTERS_FETCHING_ERROR'
     }
 }
-
-
-export const heroesFiltering = (element) => {
-    return {
-        type: 'HEROES_FILTERING',
-        payload: element
-    }
-}

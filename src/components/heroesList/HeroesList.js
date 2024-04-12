@@ -7,9 +7,9 @@ import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
 
 // Задача для этого компонента:
-// При клике на "крестик" идет удаление персонажа из общего состояния
+// При клике на "крестик" идет удаление персонажа из общего состояния -done
 // Усложненная задача:
-// Удаление идет и с json файла при помощи метода DELETE
+// Удаление идет и с json файла при помощи метода DELETE -done
 
 const HeroesList = () => {
     const {heroes, heroesLoadingStatus} = useSelector(state => state);
@@ -20,8 +20,7 @@ const HeroesList = () => {
         dispatch(heroesFetching());
         request("http://localhost:3001/heroes")
             .then(data => dispatch(heroesFetched(data)))
-            .catch(() => dispatch(heroesFetchingError()))
-
+            .catch(() => dispatch(heroesFetchingError()));
         // eslint-disable-next-line
     }, []);
 
