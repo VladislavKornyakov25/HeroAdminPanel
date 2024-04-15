@@ -17,37 +17,33 @@
       "name": "Морской герой",
       "description": "Как аквамен, но не из DC",
       "element": "water"
-    },
-    {
-      "id": "469aab6b-00c4-4197-af1f-b18c1f7b75e1",
-      "name": "Thor",
-      "description": "Kick enemies asses\n",
-      "element": "water"
-    },
-    {
-      "id": "344dd3ea-45f2-45fc-b889-16e117e12d4e",
-      "name": "6",
-      "description": "6",
-      "element": "fire"
-    },
-    {
-      "id": "dfb1ae70-72f4-432b-90d4-bcacfebc1792",
-      "name": "thor",
-      "description": "ASD",
-      "element": "fire"
-    },
-    {
-      "id": "8684e0e2-b268-42a6-ba6b-c4bcb6d89939",
-      "name": "Jordan",
-      "description": "Hit the lightning",
-      "element": "wind"
     }
   ],
   "filters": [
-    "all",
-    "fire",
-    "water",
-    "wind",
-    "earth"
+    {
+      "name": "all",
+      "label": "Все",
+      "className": "btn-outline-dark"
+    },
+    {
+      "name": "fire",
+      "label": "Огонь",
+      "className": "btn-danger"
+    },
+    {
+      "name": "water",
+      "label": "Вода",
+      "className": "btn-primary"
+    },
+    {
+      "name": "wind",
+      "label": "Ветер",
+      "className": "btn-success"
+    },
+    {
+      "name": "earth",
+      "label": "Земля",
+      "className": "btn-secondary"
+    }
   ]
 }

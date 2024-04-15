@@ -1,19 +1,7 @@
-import { heroesDeleting, heroesFetchingError } from "../../actions";
-import { useDispatch } from 'react-redux';
-import {useHttp} from '../../hooks/http.hook';
 
-const HeroesListItem = ({name, description, element, id}) => {
-
-    const {request} = useHttp();
-	const dispatch = useDispatch();
+const HeroesListItem = ({name, description, element, onDelete}) => {
 
     let elementClassName;
-
-    const removeItem = () => {        
-        request(`http://localhost:3001/heroes/${id}`, 'DELETE')
-            .then(() => dispatch(heroesDeleting(id)))
-            .catch(() => dispatch(heroesFetchingError()));
-    }
 
     switch (element) {
         case 'fire':
@@ -35,7 +23,7 @@ const HeroesListItem = ({name, description, element, id}) => {
     return (
         <li 
             className={`card flex-row mb-4 shadow-lg text-white ${elementClassName}`}>
-            <img src="https://st3.depositphotos.com/19428878/37071/v/450/depositphotos_370714626-stock-illustration-guest-avatar-vector-illustration-default.jpg" 
+            <img src="http://www.stpaulsteinbach.org/wp-content/uploads/2014/09/unknown-hero.jpg" 
                  className="img-fluid w-25 d-inline" 
                  alt="unknown hero" 
                  style={{'objectFit': 'cover'}}/>
@@ -44,12 +32,9 @@ const HeroesListItem = ({name, description, element, id}) => {
                 <h3 className="card-title">{name}</h3>
                 <p className="card-text">{description}</p>
             </div>
-            <span className="position-absolute top-0 start-100 translate-middle badge border rounded-pill bg-light">
-                <button 
-                    type="button" 
-                    onClick={removeItem}
-                    className="btn-close btn-close" 
-                    aria-label="Close"></button>
+            <span onClick={onDelete} 
+                className="position-absolute top-0 start-100 translate-middle badge border rounded-pill bg-light">
+                <button type="button" className="btn-close btn-close" aria-label="Close"></button>
             </span>
         </li>
     )

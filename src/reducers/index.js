@@ -2,11 +2,28 @@ const initialState = {
     heroes: [],
     heroesLoadingStatus: 'idle',
     filters: [],
-    filtersLoadingStatus: 'idle'
+    filtersLoadingStatus: 'idle',
+    activeFilter: 'all'
 }
 
-const reducer = (state = initialState, action) => {  
+const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case 'HEROES_FETCHING':
+            return {
+                ...state,
+                heroesLoadingStatus: 'loading'
+            }
+        case 'HEROES_FETCHED':
+            return {
+                ...state,
+                heroes: action.payload,               
+                heroesLoadingStatus: 'idle'
+            }
+        case 'HEROES_FETCHING_ERROR':
+            return {
+                ...state,
+                heroesLoadingStatus: 'error'
+            }
         case 'FILTERS_FETCHING':
             return {
                 ...state,
@@ -22,33 +39,24 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 filtersLoadingStatus: 'error'
-            }            
-        case 'HEROES_FETCHING':
-            return {
-                ...state,
-                heroesLoadingStatus: 'loading'
             }
-        case 'HEROES_FETCHED':
+        case 'ACTIVE_FILTER_CHANGED':
             return {
                 ...state,
-                heroes: action.payload,
-                heroesLoadingStatus: 'idle'
+                activeFilter: action.payload                
             }
-        case 'HEROES_FETCHING_ERROR':
+        // Самая сложная часть - это показывать новые элементы по фильтрам
+        // при создании или удалении
+        case 'HERO_CREATED':            
             return {
                 ...state,
-                heroesLoadingStatus: 'error'
-            }    
-        case 'HEROES_ADDING':             
-            return {
-                ...state,
-                heroes: [...state.heroes, {...action.payload}]
+                heroes: [...state.heroes, action.payload]               
             }
-        case 'HEROES_DELETING':            
+        case 'HERO_DELETED':             
             return {
                 ...state,
-                heroes: state.heroes.filter(item => item.id !== action.payload)
-            }        
+                heroes: state.heroes.filter(item => item.id !== action.payload)               
+            }
         default: return state
     }
 }
