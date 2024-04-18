@@ -19,8 +19,7 @@ const HeroesList = () => {
         dispatch(fetchHeroes());
         // eslint-disable-next-line
     }, []);   
-    const onDelete = useCallback((id) => {
-        // Удаление персонажа по его id
+    const onDelete = useCallback((id) => {        
         request(`http://localhost:3001/heroes/${id}`, "DELETE")
             .then(data => console.log(data, 'Deleted'))
             .then(dispatch(heroDeleted(id)))
